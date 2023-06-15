@@ -11,6 +11,7 @@ import './app.css';
 class App extends Component {
     constructor(props) {
         super(props);
+        this.newId = 4;
         this.state = {
             data: [
                 {name: 'Сотрудник № 1', salary: 800, increase: true, id: 1},
@@ -18,6 +19,21 @@ class App extends Component {
                 {name: 'Сотрудник № 3', salary: 3200, increase: false, id: 3}
             ]
         }
+    }
+
+    addItem = (name, salary) => {
+        const newItem = {
+            name,
+            salary,
+            increase: false,
+            id: this.newId++
+        }
+        this.setState(({data}) => {
+            const newArr = [...data, newItem]
+            return {
+                data: newArr
+            }
+        })
     }
 
     deleteItem = (id) => {
@@ -41,7 +57,7 @@ class App extends Component {
                 <EmployeesList
                     data={this.state.data}
                     onDelete={this.deleteItem}/>
-                <EmployeesAddForm/>
+                <EmployeesAddForm onAdd={this.addItem}/>
             </div>
         );
     }
