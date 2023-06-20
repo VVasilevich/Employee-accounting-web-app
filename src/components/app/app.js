@@ -94,22 +94,24 @@ class App extends Component {
         const visibleData = this.filterPost(this.searchEmp(data, term), filter);
         return (
             <div className="app">
-                <AppInfo
-                    employees={employees}
-                    increased={increased}/>
-    
-                <div className="search-panel">
-                    <SearchPanel onUpdateSearch={this.onUpdateSearch}/>
-                    <AppFilter
-                        filter={filter}
-                        onFilterSelect={this.onFilterSelect}/>
+                <div className="container">
+                    <AppInfo
+                        employees={employees}
+                        increased={increased}/>
+        
+                    <div className="search-panel">
+                        <SearchPanel onUpdateSearch={this.onUpdateSearch}/>
+                        <AppFilter
+                            filter={filter}
+                            onFilterSelect={this.onFilterSelect}/>
+                    </div>
+        
+                    <EmployeesList
+                        data={visibleData}
+                        onDelete={this.deleteItem}
+                        onToggleProp={this.onToggleProp}/>
+                    <EmployeesAddForm onAdd={this.addItem}/>
                 </div>
-    
-                <EmployeesList
-                    data={visibleData}
-                    onDelete={this.deleteItem}
-                    onToggleProp={this.onToggleProp}/>
-                <EmployeesAddForm onAdd={this.addItem}/>
             </div>
         );
     }
